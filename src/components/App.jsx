@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Title from './Section/Section';
+import Title from './Section/Section'
 import FeedbackOptions, {buttonOptions} from './FeedbackOptions/FeedbackOptions';
 import Statistic from './Statistics/Statistics';
+import Notification from './Notification/Notification';
 
 
 class App extends Component {
@@ -13,18 +14,33 @@ class App extends Component {
 
  onLeaveFeedback = option => {
   this.setState(prevState => ({
-    [option.toLowerCase()]: prevState[option.toLowerCase()] + 1
+    [option]: prevState[option] + 1
   }));
-};
+  };
+  
+  totalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad
+  }
+
+  positiveFeedback = () => {
+    return Math.round((this.state.good / this.totalFeedback()) * 100);
+  }
   render() {
   
     return (
       <section>
-        <Title title='Please leave feedback' />
+        <Title title='Please leave feedback'/>
         <FeedbackOptions options={buttonOptions} onButtonClick={this.onLeaveFeedback} />
         
         <Title title='Statistics' />
-       <Statistic items={Object.entries(this.state).map(([label, value]) => ({ label, value }))} />
+        {this.totalFeedback() > 0 ? <Statistic
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.totalFeedback()}
+          positiveFeedback={this.positiveFeedback() || '0'}
+        /> : <Notification notification={'There is no feedback'}/>}
       </section>
     )
   }

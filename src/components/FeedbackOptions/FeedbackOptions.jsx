@@ -1,13 +1,13 @@
 import React from "react";
-import { Button } from "./FeedbackOptions.styled";
+import { Button, Box } from "./FeedbackOptions.styled";
 
 export default function FeedbackOptions({ options, onButtonClick }) {
     return (
-        <div>
+        <Box>
             {options.map(option => (
-                <Button key={option} onClick={() => onButtonClick(option)}>{option}</Button>
+                <Button key={option} onClick={() => onButtonClick(option.toLowerCase())}>{option}</Button>
             ))}
-        </div>
+        </Box>
     )
 }
 

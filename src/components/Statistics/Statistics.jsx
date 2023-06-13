@@ -2,14 +2,14 @@ import React from "react";
 
 import { List, ListItem } from "./Statistics.styled";
 
-export default function Statistic({ items }) {
+export default function Statistic({ good, neutral, bad, total, positiveFeedback}) {
   return (
     <List>
-      {items.map(item => (
-        <ListItem key={item.label}>
-          {item.label}: {item.value}
-        </ListItem>
-      ))}
+          <ListItem>Good: {good}</ListItem>
+          <ListItem>Neutral: {neutral}</ListItem>
+          <ListItem>Bad: {bad}</ListItem>
+          <ListItem>Total: {total}</ListItem>
+          <ListItem>Positive feedback: {positiveFeedback}%</ListItem>
     </List>
   );
 }
