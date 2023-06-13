@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 import { List, ListItem } from "./Statistics.styled";
 
 export default function Statistic({ good, neutral, bad, total, positiveFeedback}) {
@@ -14,3 +14,10 @@ export default function Statistic({ good, neutral, bad, total, positiveFeedback}
   );
 }
 
+Statistic.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positiveFeedback: PropTypes.number.isRequired,
+};
